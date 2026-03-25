@@ -457,6 +457,110 @@ h2 {
     transform: scale(1.1);
 }
 
+/* HIMNO */
+:root {
+    --gold: #d4af37;
+    --green-dark: #0f1f17;
+    --green-main: #1c3a2c;
+    --bg: #f7f7f5;
+}
+
+/* BASE */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: #1a1a1a;
+}
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+section {
+    margin-bottom: 80px;
+}
+
+/* TITULOS */
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 10px;
+}
+
+/* ===================== */
+/* HIMNO */
+/* ===================== */
+
+/* separación SOLO para esta sección */
+.hymn-section {
+    margin-top: 40px;
+}
+
+.hymn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.hymn-card {
+    max-width: 650px;
+    width: 100%;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+.hymn-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.stanza {
+    margin-bottom: 20px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #333;
+}
+
+.stanza strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--green-main);
+}
+
+.chorus {
+    background: #f2f2f2;
+    padding: 15px;
+    border-radius: 10px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* BOTÓN */
+.btn-audio {
+    margin-top: 25px;
+    background: linear-gradient(135deg, var(--green-main), #000);
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn-audio:hover {
+    transform: translateY(-2px);
+}
+
 /* OID */
 .oid-section {
     background: linear-gradient(145deg, #ffffff, #f1efe8);
@@ -789,10 +893,8 @@ document.getElementById('timeline-container').innerHTML = timelineHTML;
     <h3>Misión [REDACTADO]</h3>
 
     <p class="redacted-text">
-      ██████████████████████████████████████████████████████████████  
-      Operación ejecutada en la Base Militar E-12. Toda la información ha sido eliminada 
+      Operación ejecutada en la Base Militar E-12. Toda la información ha sido borrada de la existencia 
       por orden del alto mando.  
-      ██████████████████████████████████████████████████████████████
     </p>
 
     <div class="mission-footer">
@@ -823,6 +925,62 @@ document.getElementById('timeline-container').innerHTML = timelineHTML;
   </div>
 
 </div>
+</section>
+
+<section class="hymn-section">
+    <h2>Himno Nacional</h2>
+
+    <div class="hymn-container">
+        <div class="hymn-card">
+
+            <h3>Himno del Segundo Gran Reino</h3>
+
+            <div class="stanza">
+                <strong>Estrofa I</strong>
+                Plainland, tus campos hablan de sol,<br>
+                Verde horizonte, paz y labor.<br>
+                Bajo este cielo libre y sin fin,<br>
+                brota en tu suelo el buen porvenir.
+            </div>
+
+            <div class="stanza chorus">
+                <strong>Coro</strong>
+                ¡Gloria al Reino, luz de nuestra fe!<br>
+                Firmes avanzamos, nada nos detiene ya.<br>
+                Blanco, amarillo y verde en la piel,<br>
+                Plainland sagrada, patria del bien.
+            </div>
+
+            <div class="stanza">
+                <strong>Estrofa II</strong>
+                Clara tu estrella brilla al andar,<br>
+                blanca esperanza, fuerza y pilar.<br>
+                Luz amarilla, canto y raíz,<br>
+                guía del pueblo que quiere vivir.
+            </div>
+
+            <div class="stanza">
+                <strong>Estrofa III</strong>
+                Nuestra tierra despierta en su color,<br>
+                vientos que dan al alma su flor.<br>
+                Verde que brota libre y tenaz,<br>
+                blanco en la estrella, limpio compás.
+            </div>
+
+            <div class="stanza">
+                <strong>Estrofa IV</strong>
+                Tierras que cantan bajo el sol,<br>
+                cielo encendido en oro chillón.<br>
+                Juntos sembramos paso y canción,<br>
+                con manos firmes, sin rendición.
+            </div>
+
+            <button class="btn-audio" onclick="window.open('https://www.youtube.com/watch?v=HQQFWtw4FIQ')">
+                ▶ Escuchar versión oficial
+            </button>
+
+        </div>
+    </div>
 </section>
 
 <!-- SECCIÓN DE MONEDA OFICIAL -->
