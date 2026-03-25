@@ -1,328 +1,1188 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soberanía de Plainland • Portal del Segundo Reino</title>
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&family=Permanent+Marker&display=swap">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plainland</title>
 
-    <style>
-        :root {
-            --royal-gold: #c5a059;
-            --royal-gold-light: #e0c28d;
-            --soft-green: #1b301b;
-            --deep-green: #0d1a0d;
-            --bg-color: #f4f2eb;
-            --text-dark: #1a241b;
-            --note-color: #fef9c3;
-            --card-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap">
 
-        body {
-            margin: 0; background-color: var(--bg-color);
-            color: var(--text-dark); font-family: 'Inter', sans-serif;
-            display: flex; flex-direction: column; align-items: center;
-        }
+<style>
+:root {
+    --royal-gold: #c5a059;
+    --royal-gold-light: #e0c28d;
+    --soft-green: #1b301b;
+    --deep-green: #0d1a0d;
+    --bg-color: #f4f2eb;
+    --text-dark: #1a241b;
+    --card-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
 
-        /* --- HEADER --- */
-        header.web-header {
-            width: 100%; background: var(--deep-green); color: white;
-            padding: 100px 0; text-align: center; border-bottom: 8px solid var(--royal-gold);
-        }
+body {
+    margin: 0;
+    background: var(--bg-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+}
 
-        .web-header h1 {
-            font-family: 'Playfair Display', serif; font-size: 3.5rem;
-            margin: 0; letter-spacing: 10px; text-transform: uppercase;
-        }
+/* HEADER */
+.main-header {
+    background: radial-gradient(circle at top, #1f3d2f, #0d1a0d);
+    border-bottom: 4px solid var(--royal-gold);
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+}
 
-        .subtitle-official {
-            display: block; width: 100%; text-align: center;
-            letter-spacing: 5px; opacity: 0.8; margin-top: 25px;
-            font-size: 1rem; color: var(--royal-gold-light);
-            text-transform: uppercase;
-        }
+/* efecto decorativo sutil */
+.main-header::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(197,160,89,0.08), transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+}
 
-        main { width: 90%; max-width: 1100px; padding: 60px 0; }
-        section { margin-bottom: 120px; }
-        
-        h2 {
-            font-family: 'Playfair Display', serif; font-size: 2.5rem;
-            color: var(--soft-green); border-bottom: 2px solid var(--royal-gold);
-            padding-bottom: 15px; margin-bottom: 40px;
-        }
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-        .rich-text { font-size: 1.15rem; line-height: 2; text-align: justify; margin-bottom: 30px; }
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    position: relative;
+    z-index: 2;
+}
 
-        /* --- MAPA INTERACTIVO --- */
-        .map-section { text-align: center; }
-        .map-container {
-            position: relative; display: inline-block; background: #85d7e6;
-            padding: 15px; border-radius: 20px; border: 6px solid white; box-shadow: var(--card-shadow);
-        }
-        .map-image { display: block; max-width: 100%; height: auto; border-radius: 10px; }
-        
-        .province-pin {
-            position: absolute; width: 18px; height: 18px; background: var(--royal-gold);
-            border-radius: 50%; cursor: pointer; z-index: 10;
-        }
-        .province-pin::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--royal-gold); border-radius: 50%;
-            animation: pulse-ring 1.5s infinite;
-        }
-        @keyframes pulse-ring { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(3.5); opacity: 0; } }
+.header-flag {
+    width: 90px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(197,160,89,0.4);
+}
 
-        .map-tooltip {
-            position: absolute; bottom: 150%; left: 50%; transform: translateX(-50%);
-            width: 300px; background: rgba(26, 36, 27, 0.98); color: #f0f0f0;
-            padding: 20px; border-radius: 12px; font-size: 0.95rem; visibility: hidden;
-            opacity: 0; transition: 0.3s; border: 1px solid var(--royal-gold); z-index: 100; text-align: left;
-        }
-        .province-pin:hover .map-tooltip { visibility: visible; opacity: 1; }
+.header-text h1 {
+    font-family: 'Playfair Display';
+    font-size: 3rem;
+    letter-spacing: 8px;
+    margin: 0;
+    color: white;
+}
 
-        .pin-bonaterra { top: 22%; left: 48%; }
-        .pin-capital   { top: 40%; left: 68%; }
-        .pin-canaveral { top: 68%; left: 52%; }
-        .pin-naranjos  { top: 65%; left: 20%; }
+.subtitle {
+    margin-top: 8px;
+    color: var(--royal-gold-light);
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+}
 
-        /* --- HIMNO COMPLETO (STICKY NOTE) --- */
-        .hymn-container { display: flex; justify-content: center; margin: 40px 0; }
-        .sticky-note {
-            background: var(--note-color); padding: 50px; width: 100%; max-width: 550px;
-            box-shadow: 15px 15px 35px rgba(0,0,0,0.1); transform: rotate(-1deg);
-            position: relative; border-radius: 2px; text-align: center;
-        }
-        .sticky-note h3 { font-family: 'Permanent Marker', cursive; font-size: 2.2rem; margin-top: 0; color: #333; }
-        .stanza { margin-bottom: 25px; font-size: 1.05rem; line-height: 1.6; color: #444; }
-        .stanza strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--soft-green); margin-bottom: 5px; }
-        .chorus { font-weight: bold; font-style: italic; color: #1a1a1a; padding: 10px; border-top: 1px dashed #ccc; border-bottom: 1px dashed #ccc; display: inline-block; }
-        .btn-audio {
-            background: #222; color: white; border: none; padding: 18px; width: 80%;
-            font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; transition: 0.3s;
-        }
-        .btn-audio:hover { background: #000; }
 
-        /* --- GALERÍA --- */
-        .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .media-item { background: white; padding: 15px; border-radius: 12px; box-shadow: var(--card-shadow); }
-        .media-item img { width: 100%; height: 240px; object-fit: cover; border-radius: 6px; }
-        .media-desc { margin-top: 15px; font-size: 0.9rem; color: #555; text-align: left; line-height: 1.6; border-top: 1px solid #eee; padding-top: 10px; }
+/* MAIN */
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+    padding: 60px 0;
+}
 
-        /* --- REGISTRO OID --- */
-        .oid-section {
-            background: white; padding: 50px; border-radius: 20px; border: 1px solid #eee; box-shadow: var(--card-shadow);
-        }
-        .form-group { margin-bottom: 25px; text-align: left; }
-        .form-group label { display: block; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; color: var(--soft-green); }
-        .form-group input, .form-group select { width: 100%; padding: 15px; border: 1.5px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        .btn-submit { background: var(--soft-green); color: white; padding: 18px 40px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1.1rem; }
+section {
+    margin-bottom: 120px;
+}
 
-        /* --- OID DNI TEMPLATE --- */
-        #dni-result-container { position: fixed; top: -2000px; }
-        #oid-template {
-            width: 600px; height: 350px; background: #fdfdfb; border: 1px solid #333;
-            border-radius: 18px; position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
-        }
-        #oid-template header {
-            background: var(--soft-green); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--royal-gold);
-        }
-        #oid-template header h1 { color: var(--royal-gold-light); font-family: 'Playfair Display', serif; font-size: 1.4rem; margin: 0; letter-spacing: 3px; }
-        .oid-serial-top { text-align: right; padding: 10px 25px 0 0; font-family: monospace; font-size: 0.9rem; font-weight: bold; color: #555; }
-        .oid-body { padding: 10px 30px; display: flex; gap: 30px; align-items: center; }
-        .oid-photo { width: 120px; height: 150px; background: #e9e7e0; border: 2px solid var(--soft-green); border-radius: 8px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .oid-data { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .data-label { font-size: 0.6rem; color: #666; text-transform: uppercase; }
-        .data-value { font-family: 'Playfair Display', serif; font-size: 1rem; color: #111; display: block; border-bottom: 1px solid #eee; margin-bottom: 2px; }
-        .oid-footer { position: absolute; bottom: 15px; left: 30px; font-family: monospace; font-size: 0.75rem; color: #aaa; }
+h2 {
+    font-family: 'Playfair Display';
+    font-size: 2.5rem;
+    border-bottom: 2px solid var(--royal-gold);
+    padding-bottom: 10px;
+}
 
-        footer { background: #0a110a; color: var(--royal-gold); padding: 60px 0; text-align: center; width: 100%; }
-    </style>
+/* TEXTO */
+.rich-text {
+    line-height: 2;
+    font-size: 1.15rem;
+    text-align: justify;
+}
+
+/* MAPA */
+.map-container {
+    position: relative;
+    display: inline-block;
+    background: #85d7e6;
+    padding: 15px;
+    border-radius: 20px;
+    border: 6px solid white;
+    box-shadow: var(--card-shadow);
+}
+
+.map-image {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* PIN */
+.province-pin {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--royal-gold);
+    border-radius: 50%;
+}
+
+/* 🔥 FIX DEL PULSO (centrado correctamente) */
+.province-pin::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background: var(--royal-gold);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 1.5s infinite;
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+}
+
+/* TOOLTIP */
+.map-tooltip {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 260px;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.province-pin:hover .map-tooltip {
+    opacity: 1;
+}
+
+/* POSICIONES */
+.pin-bonaterra { top: 22%; left: 48%; }
+.pin-capital   { top: 40%; left: 68%; }
+.pin-canaveral { top: 68%; left: 52%; }
+.pin-naranjos  { top: 65%; left: 20%; }
+
+/* GALERÍA */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.media-item {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+.media-item img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.stat-bar {
+    background: #ddd;
+    border-radius: 8px;
+    height: 12px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease;
+}
+
+.bar-fill.active {
+    background: var(--royal-gold);
+}
+
+.bar-fill.reserve {
+    background: var(--soft-green);
+}
+
+/* Misiones */
+.missions-container {
+    display: grid;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.mission-card {
+    background: #111;
+    color: #eee;
+    border-left: 5px solid var(--royal-gold);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    transition: 0.3s;
+}
+
+.mission-card:hover {
+    transform: translateY(-3px);
+}
+
+.mission-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.mission-type {
+    color: var(--royal-gold-light);
+}
+
+.mission-status {
+    font-weight: bold;
+}
+
+/* estados */
+.completed .mission-status {
+    color: #4caf50;
+}
+
+.partial .mission-status {
+    color: #ff9800;
+}
+
+.classified .mission-status {
+    color: #f44336;
+}
+
+.exploration .mission-type {
+    color: #64b5f6;
+}
+
+/* título */
+.mission-card h3 {
+    font-family: 'Playfair Display';
+    margin: 10px 0;
+}
+
+/* footer */
+.mission-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-top: 15px;
+    color: #aaa;
+}
+
+/* texto clasificado */
+.redacted-text {
+    font-family: monospace;
+    color: #888;
+    letter-spacing: 2px;
+}
+
+.festividades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.fest-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: 0.3s;
+    position: relative;
+}
+
+.fest-card:hover {
+    transform: translateY(-5px);
+}
+
+/* título */
+.fest-card h3 {
+    font-family: 'Playfair Display';
+    margin-bottom: 10px;
+}
+
+/* texto */
+.fest-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* fecha */
+.fecha {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 0.8rem;
+    color: #777;
+    letter-spacing: 1px;
+}
+
+/* destacada (día de plainland) */
+.destacada {
+    border: 2px solid var(--royal-gold);
+    background: linear-gradient(135deg, #fff, #f4f2eb);
+}
+
+.destacada h3 {
+    color: var(--soft-green);
+}
+
+    #contador-aniversario {
+        background: #e0c28d;
+        color: #0d1a0d;
+        padding: 30px 20px;
+        margin: 40px auto;
+        max-width: 600px;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        border: 3px solid #c5a059;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    #contador-aniversario h2 {
+        font-family: 'Playfair Display', serif;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+    }
+
+    #contador-aniversario span {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+/* BILLETES */
+.billete {
+    width: 420px;
+    height: 220px;
+    background: linear-gradient(135deg, #fff8e7, #f4f2eb);
+    border: 5px solid var(--royal-gold);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05), 0 8px 25px rgba(0,0,0,0.2);
+    position: relative;
+    padding: 25px 30px 20px 30px;
+    box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.billete:hover {
+    transform: translateY(-5px);
+}
+
+.billete::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(197,160,89,0.05) 0px,
+        rgba(197,160,89,0.05) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    z-index: 0;
+}
+
+.serie {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #555;
+    z-index: 2;
+    background: rgba(255, 248, 231, 0.8);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.euro {
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--soft-green);
+    background: rgba(255, 248, 231, 0.8);
+    padding: 3px 6px;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    height: 100%;
+    margin-top: 25px;
+}
+
+.valor {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--soft-green);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.icono {
+    font-size: 4.5rem;
+    text-align: center;
+    margin: -15px 0 10px 0;
+    transform: scale(1.1);
+}
+
+/* OID */
+.oid-section {
+    background: linear-gradient(145deg, #ffffff, #f1efe8);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid #ddd;
+    max-width: 700px;
+    margin: 40px auto 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #555;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-family: 'Inter';
+    transition: 0.2s;
+}
+
+/* efecto focus elegante */
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--royal-gold);
+    box-shadow: 0 0 8px rgba(197,160,89,0.3);
+}
+
+/* botón épico */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--royal-gold), #e6c76a);
+    color: #1a241b;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* aviso */
+.oid-aviso {
+    background: #fff3cd;
+    padding: 15px;
+    border-left: 4px solid #ffc107;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+
+/* FOOTER */
+footer {
+    background: #0a110a;
+    color: var(--royal-gold);
+    text-align: center;
+    padding: 50px;
+}
+</style>
+
 </head>
 <body>
 
-<header class="web-header">
-    <h1>PLAINLAND</h1>
-    <span class="subtitle-official">PORTAL OFICIAL DEL SEGUNDO GRAN REINO • MMXXVI</span>
+<header class="main-header">
+
+  <div class="header-content">
+    <img src="https://i.ibb.co/yJyrwsh/copy-890-A584-A-E430-4336-9-F2-D-DCD69-FCD31-BE.gif" 
+         alt="Bandera de Plainland" 
+         class="header-flag">
+
+    <div class="header-text">
+      <h1>PLAINLAND</h1>
+      <p class="subtitle">Portal Oficial del Reino · MMXXVI</p>
+    </div>
+  </div>
+
 </header>
 
+
+
 <main>
-    <section>
-        <h2>Crónicas de la Soberanía</h2>
-        <div class="rich-text">
-            <p>El <strong>Segundo Gran Reino de Plainland</strong> representa la culminación de un proceso histórico de unificación. En el <strong>año 2022</strong>, nacimos como una república experimental, buscando un equilibrio en tiempos de incertidumbre. La transición al <strong>Primer Imperio en 2023</strong> trajo consigo la expansión necesaria para proteger nuestras fronteras y unificar a los clanes dispersos bajo una sola bandera.</p>
-            <p>Tras la reforma militar de <strong>2024</strong> y la exitosa anexión de los territorios occidentales, el Estado alcanzó su madurez política. La proclamación del Segundo Gran Reino no fue solo un cambio de nombre, sino el establecimiento de una era de oro donde el orden jerárquico y la cultura se funden para evitar los errores del pasado republicano.</p>
-        </div>
-    </section>
 
-    <section class="map-section">
-        <h2>Cartografía Estratégica</h2>
-        <div class="map-container">
-            <img src="https://i.ibb.co/jkCjr3Bb/2-sin-ti-tulo-20250701174006.png" class="map-image">
-            <div class="province-pin pin-bonaterra"><div class="map-tooltip"><strong>Bonaterra:</strong> Pulmón verde y centro logístico forestal.</div></div>
-            <div class="province-pin pin-capital"><div class="map-tooltip"><strong>Ciudad de Plainland:</strong> Sede del Gobierno y el imponente Graffitorium.</div></div>
-            <div class="province-pin pin-canaveral"><div class="map-tooltip"><strong>El Cañaveral:</strong> Nodo energético solar y centro tecnológico.</div></div>
-            <div class="province-pin pin-naranjos"><div class="map-tooltip"><strong>Los Naranjos:</strong> Granero cítrico de la nación.</div></div>
-        </div>
-    </section>
+<section>
+  <h2>Historia del Segundo Gran Reino de Plainland</h2>
+  <p>Una cronología de los eventos más importantes que marcaron el desarrollo del reino.</p>
 
-    <section>
-        <div class="hymn-container">
-            <div class="sticky-note">
-                <h3>Himno Nacional</h3>
-                
-                <div class="stanza">
-                    <strong>Estrofa I</strong>
-                    Plainland, tus campos hablan de sol,<br>
-                    Verde horizonte, paz y labor.<br>
-                    Bajo este cielo libre y sin fin,<br>
-                    brota en tu suelo el buen porvenir.
-                </div>
-
-                <div class="stanza">
-                    <strong>Coro</strong>
-                    <span class="chorus">
-                        ¡Gloria al Reino, luz de nuestra fe!<br>
-                        Firmes avanzamos, nada nos detiene ya.<br>
-                        Blanco, amarillo y verde en la piel,<br>
-                        Plainland sagrada, patria del bien.
-                    </span>
-                </div>
-
-                <div class="stanza">
-                    <strong>Estrofa II</strong>
-                    Clara tu estrella brilla al andar,<br>
-                    blanca esperanza, fuerza y pilar.<br>
-                    Luz amarilla, canto y raíz,<br>
-                    guía del pueblo que quiere vivir.
-                </div>
-
-                <div class="stanza">
-                    <strong>Estrofa III</strong>
-                    Nuestra tierra despierta en su color,<br>
-                    vientos que dan al alma su flor.<br>
-                    Verde que brota libre y tenaz,<br>
-                    blanco en la estrella, limpio compás.
-                </div>
-
-                <div class="stanza">
-                    <strong>Estrofa IV</strong>
-                    Tierras que cantan bajo el sol,<br>
-                    cielo encendido en oro chillón.<br>
-                    Juntos sembramos paso y canción,<br>
-                    con manos firmes, sin rendición.
-                </div>
-
-                <button class="btn-audio" onclick="window.open('https://www.youtube.com/watch?v=HQQFWtw4FIQ')">▶ ESCUCHAR VERSIÓN OFICIAL</button>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Archivo Visual de la Corona</h2>
-        <div class="media-grid">
-            <div class="media-item">
-                <img src="https://i.ibb.co/8L6vgrX4/IMG-1645.jpg">
-                <div class="media-desc"><strong>Cartografía de Campaña:</strong> Plano táctico utilizado por la Cuadrilla C.A.R.R.O.T. para la defensa de los sectores periféricos del Reino.</div>
-            </div>
-            <div class="media-item">
-                <img src="https://i.ibb.co/j9SRCgzd/IMG-1757.jpg">
-                <div class="media-desc"><strong>Estandarte Sagrado:</strong> Los colores blanco y verde que representan la pureza del cielo y la fertilidad de nuestras tierras cítricas.</div>
-            </div>
-            <div class="media-item">
-                <img src="https://i.ibb.co/SDMR4xFM/IMG-1935.jpg">
-                <div class="media-desc"><strong>Escudo de Armas:</strong> Sello real que garantiza la legitimidad de todos los documentos y decretos emitidos por el Graffitorium.</div>
-            </div>
-            <div class="media-item">
-                <img src="https://i.ibb.co/WNW4mCfg/IMG-3388.jpg">
-                <div class="media-desc"><strong>Terra in Extremis:</strong> Registro visual de las regiones indómitas donde la soberanía de Plainland se funde con la naturaleza salvaje.</div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2>Expedición de Identidad Digital (O.I.D.)</h2>
-        <div class="oid-section">
-            <div class="form-group"><label>Nombre Completo</label><input type="text" id="reg-nombre" placeholder="Nombre y Apellidos"></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div class="form-group"><label>Nacimiento</label><input type="date" id="reg-fnac"></div>
-                <div class="form-group"><label>Especie</label>
-                    <select id="reg-especie">
-                        <option>Lepórido (Conejo)</option>
-                        <option>Humano Colaborador</option>
-                        <option>Cánido (Perro)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group"><label>Provincia de Residencia</label>
-                <select id="reg-residencia">
-                    <option>Ciudad de Plainland (Capital)</option>
-                    <option>Bonaterra</option>
-                    <option>El Cañaveral</option>
-                    <option>Los Naranjos</option>
-                </select>
-            </div>
-            <div class="form-group"><label>Fotografía de Perfil</label><input type="file" id="reg-foto"></div>
-            <button class="btn-submit" onclick="generarOID()">EXPEDIR O.I.D. OFICIAL</button>
-        </div>
-    </section>
-</main>
-
-<div id="dni-result-container">
-    <div id="oid-template">
-        <header><h1>PLAINLAND</h1><span style="color:white; font-size: 0.7rem;">DOC. IDENTIDAD DIGITAL</span></header>
-        <div class="oid-serial-top">SERIE: <span id="oid-serial-val">00000000</span></div>
-        <div class="oid-body">
-            <div class="oid-photo"><img id="oid-img-preview" style="width:100%; height:100%; object-fit:cover; display:none;"></div>
-            <div class="oid-data">
-                <div style="grid-column: span 2;"><span class="data-label">Nombre del Súbdito</span><strong class="data-value" id="res-nom">---</strong></div>
-                <div><span class="data-label">Nacimiento</span><strong class="data-value" id="res-fec">---</strong></div>
-                <div><span class="data-label">Especie</span><strong class="data-value" id="res-esp">---</strong></div>
-                <div style="grid-column: span 2;"><span class="data-label">Residencia Oficial</span><strong class="data-value" id="res-loc">---</strong></div>
-            </div>
-        </div>
-        <div class="oid-footer">P<<<<<PLAINLAND<<<<<<MMXXVI<<<<<<<<<<<<<<<<<<</div>
-    </div>
-</div>
+  <div id="timeline-container" style="position: relative; margin: 40px 0; border-left: 4px solid var(--royal-gold); padding-left: 25px;"></div>
+</section>
 
 <script>
-    function generarOID() {
-        const nombre = document.getElementById('reg-nombre').value;
-        const fecha = document.getElementById('reg-fnac').value;
-        if (!nombre || !fecha) return alert("Complete sus datos reales.");
+const eventos = [
+  {
+    fecha: "2022",
+    titulo: "Nacimiento de Plainland",
+    descripcion: "El Segundo Gran Reino de Plainland representa la culminación de un proceso histórico de unificación. En el año 2022, nacimos como una república experimental, buscando un equilibrio en tiempos de incertidumbre."
+  },
+  {
+    fecha: "2023",
+    titulo: "Transición al Primer Imperio",
+    descripcion: "La transición al Primer Imperio en 2023 trajo consigo la expansión necesaria para proteger nuestras fronteras y unificar a los clanes dispersos bajo una sola bandera."
+  },
+  {
+    fecha: "2024",
+    titulo: "Reforma Militar y Expansión",
+    descripcion: "Tras la reforma militar de 2024 y la exitosa anexión de los territorios occidentales, el Estado alcanzó su madurez política."
+  },
+  {
+    fecha: "2026",
+    titulo: "Proclamación del Segundo Gran Reino",
+    descripcion: "La proclamación del Segundo Gran Reino no fue solo un cambio de nombre, sino el establecimiento de una era de oro donde el orden jerárquico y la cultura se funden para evitar los errores del pasado republicano."
+  }
+];
 
-        document.getElementById('res-nom').innerText = nombre.toUpperCase();
-        const f = new Date(fecha);
-        document.getElementById('res-fec').innerText = f.toLocaleDateString('es-ES', {day:'numeric', month:'short', year:'numeric'});
-        document.getElementById('res-esp').innerText = document.getElementById('reg-especie').value;
-        document.getElementById('res-loc').innerText = document.getElementById('reg-residencia').value;
-        document.getElementById('oid-serial-val').innerText = "PL" + Math.floor(Math.random() * 90000000 + 10000000);
+let timelineHTML = "";
 
-        const fotoInput = document.getElementById('reg-foto').files[0];
-        if (fotoInput) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.getElementById('oid-img-preview');
-                img.src = e.target.result; img.style.display = 'block';
-                setTimeout(descargar, 500);
-            }
-            reader.readAsDataURL(fotoInput);
-        } else { descargar(); }
-    }
+eventos.forEach(ev => {
+  timelineHTML += `
+    <div style="position: relative; margin-bottom: 80px; max-width: 800px;">
+      <div style="width:18px; height:18px; background: var(--royal-gold); border-radius: 50%; position: absolute; left: -36px; top: 0;"></div>
+      <h4 style="margin:0 0 8px 0; color: var(--soft-green); font-weight:600; font-size:1rem;">${ev.fecha}</h4>
+      <h3 style="margin:0 0 12px 0; font-family:'Playfair Display', serif; color: var(--deep-green); font-size:1.6rem;">${ev.titulo}</h3>
+      <p style="margin:0; line-height:1.9; font-size:1.1rem;">${ev.descripcion}</p>
+    </div>
+  `;
+});
 
-    function descargar() {
-        html2canvas(document.getElementById('oid-template'), { scale: 2 }).then(canvas => {
-            const link = document.createElement('a');
-            link.download = 'OID_Plainland.png';
-            link.href = canvas.toDataURL(); link.click();
-        });
-    }
+document.getElementById('timeline-container').innerHTML = timelineHTML;
 </script>
 
+<section>
+<h2>Cartografía Estratégica</h2>
+
+<div class="rich-text">
+<p>El mapa estratégico de Plainland constituye una representación visual detallada del territorio nacional, en la que se reflejan las regiones más relevantes desde el punto de vista político, económico y logístico. Cada punto señalado en el mapa no es únicamente una ubicación geográfica, sino un nodo clave dentro de la estructura del Reino, donde convergen actividades esenciales para su funcionamiento.</p>
+
+<p>Las distintas regiones que componen Plainland han sido desarrolladas con funciones específicas que permiten mantener el equilibrio interno del Estado. Desde centros administrativos hasta zonas de producción agrícola o núcleos tecnológicos, cada territorio desempeña un papel fundamental en el mantenimiento de la estabilidad y el progreso.</p>
+
+<p>La organización territorial no responde al azar, sino a una planificación estratégica que busca optimizar los recursos disponibles y garantizar la autosuficiencia del Reino. Gracias a esta distribución, Plainland es capaz de sostener su crecimiento de manera ordenada, asegurando que cada región contribuya al bienestar general.</p>
+</div>
+
+<div class="map-container">
+<img src="https://i.ibb.co/jkCjr3Bb/2-sin-ti-tulo-20250701174006.png" class="map-image">
+
+<div class="province-pin pin-bonaterra">
+<div class="map-tooltip"><strong>Bonaterra:</strong> Extensa región forestal que actúa como pulmón natural del Reino. Su riqueza ecológica y sus recursos la convierten en un enclave esencial para la sostenibilidad.</div>
+</div>
+
+<div class="province-pin pin-capital">
+<div class="map-tooltip"><strong>Ciudad de Plainland:</strong> Centro político y administrativo del Reino, donde se toman las decisiones que definen su rumbo.</div>
+</div>
+
+<div class="province-pin pin-canaveral">
+<div class="map-tooltip"><strong>El Cañaveral:</strong> Principal núcleo energético y tecnológico, especializado en el aprovechamiento de la energía solar.</div>
+</div>
+
+<div class="province-pin pin-naranjos">
+<div class="map-tooltip"><strong>Los Naranjos:</strong> Región agrícola de gran importancia, base de la producción alimentaria del Reino.</div>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>Territorios del Reino</h2>
+
+<div class="rich-text">
+
+<p><strong>El Continente:</strong> Esta es la región principal de Plainland y el núcleo donde se concentra la mayor parte de la actividad política, económica y social del Reino. En este territorio se encuentra la capital, Ciudad de Plainland, así como la gran mayoría de las regiones clave que sostienen la estructura del Estado. Desde aquí se emiten los documentos oficiales de identidad digital (O.I.D.), lo que convierte al continente en el corazón administrativo y simbólico de la soberanía.</p>
+
+<p><strong>Base Secreta E-12:</strong> [REDACTADO]</p>
+
+<p><strong>Terra in Extremis:</strong> También conocida como <em>“Terra Naturae”</em>, esta región destaca por su carácter prácticamente intacto. Se estima que entre el 95% y el 99% de su superficie está cubierta por entorno natural, lo que la convierte en uno de los territorios más salvajes y menos intervenidos de Plainland. A pesar de su apariencia indómita, resulta sorprendentemente adecuada para actividades cotidianas como el paseo, especialmente con animales. Además, alberga el mayor —y único— vertedero del Reino, lo que añade una dimensión funcional a su naturaleza aparentemente pura.</p>
+
+</div>
+</section>
+
+<section>
+<h2>Avances Tecnológicos del Reino</h2>
+
+<div class="rich-text">
+
+<p><strong>“Un pequeño paso para tener electricidad en Plainland”:</strong> En uno de los avances más simbólicos del desarrollo tecnológico del Reino, se logró encender la primera radio funcional alimentada exclusivamente por energía solar. Este hito representa el inicio de una nueva etapa en la autosuficiencia energética de Plainland, aprovechando uno de sus recursos más abundantes: la luz solar. De forma inesperada, durante las primeras pruebas, el dispositivo logró captar una emisora española, lo que demostró el alcance real del sistema desarrollado.</p>
+
+<p><strong>“Nueva tecnología militar”:</strong> El ejército C.A.R.R.O.T., en colaboración directa con la autoridad real, ha desarrollado un innovador lanzador de latas de Maíz. Este dispositivo, tomando de base el <em>lanzador de atún de Molossia</em>, representa un avance en la adaptación creativa de recursos y en la evolución del equipamiento militar del Reino. Su desarrollo refleja la combinación de ingenio, pragmatismo y sentido estratégico que caracteriza a Plainland.</p>
+
+<p><strong>Demostración visual de la versión de Molossia. El de Plainland es parecido:</strong></p>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/fzW49M0n/Video-Project.gif" alt="Video Project" border="0" style="max-width:100%; height:auto;"></a>
+
+</div>
+</section>
+
+
+
+<section>
+<h2>Infraestructura del Reino</h2>
+
+<div class="rich-text">
+
+<p><strong>Carretera PL-46:</strong> La carretera PL-46 es una de las vías más importantes de Plainland. Su acceso principal se encuentra en la región de El Cañaveral, desde donde conecta distintos puntos estratégicos del territorio. Con una velocidad máxima establecida en 70 km/h, esta vía garantiza un equilibrio entre seguridad y eficiencia en el transporte, siendo fundamental para la movilidad interna y la distribución de recursos.</p>
+
+<p><strong>El Graffitorium:</strong> Considerado uno de los edificios más emblemáticos del Reino, el Graffitorium es la sede central del poder político y administrativo. Su estructura no solo simboliza la autoridad del Estado, sino también la evolución cultural de Plainland. En su interior se toman las decisiones más importantes que determinan el futuro del Reino, consolidándose como un auténtico núcleo de poder y referencia institucional.</p>
+
+</div>
+</section>
+
+<section>
+<h2>Fuerzas Armadas del Reino</h2>
+
+<div class="rich-text">
+  <p>El <strong>Comando de Asistencia, Reconocimiento y Recursos Operativos de Táctica (C.A.R.R.O.T.)</strong> constituye el pilar estratégico de Plainland en materia de defensa y logística. Su misión incluye vigilancia, transporte de suministros y exploración de territorios remotos.</p>
+</div>
+
+<div class="army-stats">
+
+  <div class="stat-card">
+    <h3>Soldados Activos</h3>
+    <p>45</p>
+    <div class="stat-bar">
+      <div class="bar-fill active" style="width:90%;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <h3>Reservistas</h3>
+    <p>17</p>
+    <div class="stat-bar">
+      <div class="bar-fill reserve" style="width:34%;"></div>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <h3>Vehículos Especiales</h3>
+    <p>2</p>
+  </div>
+
+  <div class="stat-card">
+    <h3>Armas Principales</h3>
+    <ul>
+      <li>Lanzador de Latas de Maíz</li>
+      <li>Arcos de Precisión</li>
+      <li>Drones de Reconocimiento</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="rich-text">
+  <p><strong>General Bender Karot “Benny”</strong> lidera la unidad con un enfoque estratégico, asegurando eficiencia y disciplina entre los miembros del C.A.R.R.O.T. <strong> Fue uno se los principales inventores de el Lanzador de maíz</strong></p>
+
+  <p><strong>Memorial a Guillermo, el Conejo Soldado:</strong> Fallecido tras un accidente automovilístico con un buggy. Su valor y sacrificio inspiran a las nuevas generaciones de reclutas.</p>
+</div>
+
+</section>
+
+<section>
+<h2>Archivo de Misiones Completadas</h2>
+
+<div class="missions-container">
+
+  <!-- PROYECTO ZANAHORIA -->
+  <div class="mission-card completed">
+    <div class="mission-header">
+      <span class="mission-type">MISIÓN MILITAR</span>
+      <span class="mission-status">COMPLETADA</span>
+    </div>
+
+    <h3>Proyecto Zanahoria</h3>
+
+    <p>
+      Primera operación oficial de Plainland. Su objetivo principal fue el reclutamiento 
+      de lepóridos para la formación inicial del ejército del Reino. La misión se ejecutó 
+      con éxito, estableciendo las bases del actual cuerpo militar C.A.R.R.O.T.
+    </p>
+
+    <div class="mission-footer">
+      <span>Prioridad: Alta</span>
+      <span>Año: 2022</span>
+    </div>
+  </div>
+
+  <!-- MISIÓN KABOOM -->
+  <div class="mission-card partial">
+    <div class="mission-header">
+      <span class="mission-type">MISIÓN MILITAR</span>
+      <span class="mission-status">PARCIAL</span>
+    </div>
+
+    <h3>Misión Kaboom</h3>
+
+    <p>
+      Operación destinada al desarrollo de tres vehículos militares. Dos unidades fueron 
+      completadas con éxito, sin embargo, el tercer prototipo fue destruido tras una 
+      repentina explosión en la cabina durante la fase final de pruebas.
+    </p>
+
+    <div class="mission-footer">
+      <span>Prioridad: Media</span>
+      <span>Resultado: Inestable</span>
+    </div>
+  </div>
+
+  <!-- MISIÓN REDACTADA -->
+  <div class="mission-card classified">
+    <div class="mission-header">
+      <span class="mission-type">MISIÓN MILITAR</span>
+      <span class="mission-status">DESTRUIDA</span>
+    </div>
+
+    <h3>Misión [REDACTADO]</h3>
+
+    <p class="redacted-text">
+      ██████████████████████████████████████████████████████████████  
+      Operación ejecutada en la Base Militar E-12. Toda la información ha sido eliminada 
+      por orden del alto mando.  
+      ██████████████████████████████████████████████████████████████
+    </p>
+
+    <div class="mission-footer">
+      <span>Acceso: Restringido</span>
+      <span>Estado: Eliminado</span>
+    </div>
+  </div>
+
+  <!-- MISIÓN DRON -->
+  <div class="mission-card exploration">
+    <div class="mission-header">
+      <span class="mission-type">EXPLORACIÓN</span>
+      <span class="mission-status">COMPLETADA</span>
+    </div>
+
+    <h3>Misión Dron</h3>
+
+    <p>
+      Operación llevada a cabo en 2024. Considerada una de las misiones mejor documentadas 
+      de Plainland, en la cual se empleó un dron para explorar zonas remotas del territorio, 
+      descubriendo múltiples áreas desconocidas y ampliando el conocimiento cartográfico del Reino.
+    </p>
+
+    <div class="mission-footer">
+      <span>Prioridad: Alta</span>
+      <span>Año: 2024</span>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- SECCIÓN DE MONEDA OFICIAL -->
+<section>
+  <h2>Moneda Oficial de Plainland</h2>
+  <p>Conoce los billetes de Floras, la moneda oficial del Segundo Gran Reino de Plainland.</p>
+  <div class="billetes-container"></div>
+</section>
+
+<script>
+/* Valores de los billetes en Floras */
+const valores = [5, 10, 20, 50];
+const container = document.querySelector('.billetes-container');
+
+valores.forEach((valor, index) => {
+    // Crear el contenedor del billete
+    const billete = document.createElement('div');
+    billete.className = 'billete';
+
+    // Número de serie
+    const serieDiv = document.createElement('div');
+    serieDiv.className = 'serie';
+    serieDiv.textContent = 'SERIE: PL' + Math.floor(Math.random() * 90000000 + 10000000);
+
+    // Valor en euros arriba izquierda
+    const euroDiv = document.createElement('div');
+    euroDiv.className = 'euro';
+    euroDiv.textContent = (valor * 1.3).toFixed(2) + ' €';
+
+    // Contenedor del contenido centrado
+    const contenido = document.createElement('div');
+    contenido.className = 'contenido';
+
+    // Valor principal
+    const valorDiv = document.createElement('div');
+    valorDiv.className = 'valor';
+    valorDiv.textContent = valor + ' Floras';
+
+    // Icono central (rosa)
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'icono';
+    iconDiv.textContent = '🌸';
+
+    contenido.appendChild(valorDiv);
+    contenido.appendChild(iconDiv);
+
+    billete.appendChild(serieDiv);
+    billete.appendChild(euroDiv);
+    billete.appendChild(contenido);
+
+    // Agregar el billete al contenedor
+    container.appendChild(billete);
+
+    // Línea vacía (espaciador) excepto después del último
+    if(index < valores.length - 1){
+        const separador = document.createElement('div');
+        separador.style.height = '30px'; // Ajusta la separación
+        container.appendChild(separador);
+    }
+});
+</script>
+
+<section>
+<h2>Festividades del Reino</h2>
+
+<div class="festividades-grid">
+
+  <div class="fest-card">
+    <h3>🎄 Navidad</h3>
+    <p>Celebración de unidad y prosperidad en todo el Reino, donde los ciudadanos decoran sus hogares y comparten alimentos tradicionales.</p>
+    <span class="fecha">25 de diciembre</span>
+  </div>
+
+  <div class="fest-card">
+    <h3>🎃 Halloween</h3>
+    <p>Durante esta noche, las regiones se llenan de misterio. Se realizan decoraciones, disfraces y actividades nocturnas.</p>
+    <span class="fecha">31 de octubre</span>
+  </div>
+
+  <div class="fest-card">
+    <h3>🍪 Día de la Galleta</h3>
+    <p>Festividad dedicada a la repostería del Reino. Se elaboran y comparten galletas entre ciudadanos.</p>
+    <span class="fecha">Fecha variable</span>
+  </div>
+
+  <div class="fest-card">
+    <h3>❤️ 14 de Febrero</h3>
+    <p>Día dedicado a la amistad y la unión entre ciudadanos del Reino.</p>
+    <span class="fecha">14 de febrero</span>
+  </div>
+
+  <div class="fest-card">
+    <h3>🍀 Día de San Patricio</h3>
+    <p>Celebración cultural marcada por el color verde, símbolo de prosperidad y naturaleza.</p>
+    <span class="fecha">17 de marzo</span>
+  </div>
+
+  <div class="fest-card destacada">
+    <h3>👑 Día de Plainland</h3>
+    <p>La festividad más importante del Reino. Conmemora la identidad, soberanía y unión de todos los territorios.</p>
+    <span class="fecha">15 de marzo</span>
+  </div>
+
+</div>
+</section>
+
+<section id="contador-aniversario">
+    <h2 id="proximo-aniversario">Próximo aniversario: Calculando...</h2>
+    <p>
+        Tiempo restante: 
+        <span id="dias-restantes">0</span> días, 
+        <span id="horas-restantes">0</span> horas, 
+        <span id="minutos-restantes">0</span> minutos, 
+        <span id="segundos-restantes">0</span> segundos
+    </p>
+</section>
+
+<script>
+function actualizarContador() {
+    const fundacion = new Date("2022-03-15T11:00:00"); // Fecha de fundación exacta
+    const ahora = new Date();
+
+    // Años transcurridos exactos
+    let diffAnios = ahora.getFullYear() - fundacion.getFullYear();
+
+    // Ajustar si la fecha de aniversario de este año aún no ha pasado
+    const aniversarioEsteAno = new Date(fundacion);
+    aniversarioEsteAno.setFullYear(ahora.getFullYear());
+    if (ahora < aniversarioEsteAno) {
+        diffAnios -= 1;
+    }
+
+    // Próximo múltiplo de 5
+    const siguienteMultiplo = Math.ceil((diffAnios + 1) / 5) * 5; 
+    const proximoAniversario = new Date(fundacion);
+    proximoAniversario.setFullYear(fundacion.getFullYear() + siguienteMultiplo);
+
+    // Actualizar texto del aniversario
+    document.getElementById("proximo-aniversario").textContent =
+        `Próximo aniversario: ${siguienteMultiplo} años de Plainland`;
+
+    // Diferencia en milisegundos
+    let diffMs = proximoAniversario - ahora;
+    if(diffMs < 0) diffMs = 0;
+
+    const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diffMs / (1000 * 60)) % 60);
+    const segundos = Math.floor((diffMs / 1000) % 60);
+
+    document.getElementById("dias-restantes").textContent = dias;
+    document.getElementById("horas-restantes").textContent = horas;
+    document.getElementById("minutos-restantes").textContent = minutos;
+    document.getElementById("segundos-restantes").textContent = segundos;
+}
+
+// Inicializar inmediatamente
+actualizarContador();
+
+// Actualizar cada segundo
+setInterval(actualizarContador, 1000);
+</script>
+
+<section>
+<h2>Archivo Visual de la Corona</h2>
+
+<div class="media-grid">
+
+<div class="media-item">
+<img src="https://i.ibb.co/yJyrwsh/copy-890-A584-A-E430-4336-9-F2-D-DCD69-FCD31-BE.gif" alt="Bandera animada de Plainland">
+<div class="media-desc">
+<strong>Bandera Animada de Plainland:</strong> Representación oficial en movimiento del estandarte nacional, símbolo de soberanía, unidad y continuidad del Reino.
+</div>
+</div>
+
+<div class="media-item">
+<img src="https://i.ibb.co/8L6vgrX4/IMG-1645.jpg" alt="Cartografía de campaña">
+<div class="media-desc">
+<strong>Cartografía de Campaña:</strong> Documento táctico utilizado en operaciones estratégicas, reflejo de la organización militar del Reino.
+</div>
+</div>
+
+<div class="media-item">
+<img src="https://i.ibb.co/j9SRCgzd/IMG-1757.jpg" alt="Bandera oficial">
+<div class="media-desc">
+<strong>Bandera Oficial:</strong> Símbolo representativo del Reino, cuyos colores reflejan identidad, unidad y prosperidad.
+</div>
+</div>
+
+<div class="media-item">
+<img src="https://i.ibb.co/SDMR4xFM/IMG-1935.jpg" alt="Escudo de armas">
+<div class="media-desc">
+<strong>Escudo de Armas:</strong> Emblema oficial que certifica la legitimidad de documentos y decretos.
+</div>
+</div>
+
+<div class="media-item">
+<img src="https://i.ibb.co/xtTfJmQB/IMG-2071.jpg" alt="Mapa satelital">
+<div class="media-desc">
+<strong>Mapa Satelital:</strong> Representación del continente. Nótese la carretera en Bonaterra. Créditos a Google Earth.
+</div>
+</div>
+
+</div>
+</section>
+
+<section>
+  <h2>Expedición de Identidad Digital (O.I.D.)</h2>
+  <p class="oid-aviso">
+    ¡AVISO! Valoramos tu privacidad, y por ello, no mandamos
+    información a ningún servidor externo. Este O.I.D no se
+    necesita para entrar de Plainland y fue creado con fines
+    de entretenimiento
+  </p>
+
+
+  <div class="oid-section">
+    <div class="form-group">
+      <label>Nombre Completo</label>
+      <input type="text" id="reg-nombre" placeholder="Nombre y Apellidos">
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div class="form-group">
+        <label>Nacimiento</label>
+        <input type="date" id="reg-fnac">
+      </div>
+      <div class="form-group">
+        <label>Especie</label>
+        <select id="reg-especie">
+          <option>Lepórido (Conejo)</option>
+          <option>Humano Colaborador</option>
+          <option>Cánido (Perro)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Provincia de Residencia</label>
+      <select id="reg-residencia">
+        <option>Ciudad de Plainland (Capital)</option>
+        <option>Bonaterra</option>
+        <option>El Cañaveral</option>
+        <option>Los Naranjos</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Fotografía de Perfil</label>
+      <input type="file" id="reg-foto">
+    </div>
+
+    <button class="btn-submit" onclick="generarOID()">EXPEDIR O.I.D. OFICIAL</button>
+
+    <!-- Previsualización de la OID antes de descargar -->
+    <div id="preview-container" style="margin-top:30px;"></div>
+  </div>
+</section>
+
+<!-- Plantilla oculta OID -->
+<div id="oid-template" style="position:absolute; left:-9999px; top:-9999px; width:600px; height:350px; background:#fdfdfb; border-radius:18px; border:1px solid #333; font-family: 'Inter', sans-serif; overflow:hidden;">
+  <header style="background:#1c3a2c; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; border-bottom:4px solid #d4af37;">
+    <h1 style="color:#e6c76a; font-family:'Playfair Display', serif; font-size:1.4rem; margin:0;">PLAINLAND</h1>
+    <span style="color:white; font-size:0.7rem;">DOC. IDENTIDAD DIGITAL</span>
+  </header>
+
+  <div class="oid-serial-top" style="text-align:right; padding:10px 25px 0 0; font-family: monospace; font-size:0.9rem; font-weight:bold; color:#555;">
+    SERIE: <span id="oid-serial-val">00000000</span>
+  </div>
+
+  <div class="oid-body" style="padding:10px 30px; display:flex; gap:30px; align-items:center;">
+    <div class="oid-photo" style="width:120px; height:150px; background:#e9e7e0; border:2px solid #1c3a2c; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+      <img id="oid-img-preview" style="width:100%; height:100%; object-fit:cover; display:none;">
+    </div>
+    <div class="oid-data" style="flex:1; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div style="grid-column: span 2;">
+        <span class="data-label" style="font-size:0.6rem; color:#666; text-transform:uppercase;">Nombre del Súbdito</span>
+        <strong class="data-value" id="res-nom" style="font-family:'Playfair Display', serif; font-size:1rem; color:#111; display:block; border-bottom:1px solid #eee; margin-bottom:2px;">---</strong>
+      </div>
+      <div>
+        <span class="data-label" style="font-size:0.6rem; color:#666; text-transform:uppercase;">Nacimiento</span>
+        <strong class="data-value" id="res-fec" style="font-family:'Playfair Display', serif; font-size:1rem; color:#111; display:block; border-bottom:1px solid #eee; margin-bottom:2px;">---</strong>
+      </div>
+      <div>
+        <span class="data-label" style="font-size:0.6rem; color:#666; text-transform:uppercase;">Especie</span>
+        <strong class="data-value" id="res-esp" style="font-family:'Playfair Display', serif; font-size:1rem; color:#111; display:block; border-bottom:1px solid #eee; margin-bottom:2px;">---</strong>
+      </div>
+      <div style="grid-column: span 2;">
+        <span class="data-label" style="font-size:0.6rem; color:#666; text-transform:uppercase;">Residencia Oficial</span>
+        <strong class="data-value" id="res-loc" style="font-family:'Playfair Display', serif; font-size:1rem; color:#111; display:block; border-bottom:1px solid #eee; margin-bottom:2px;">---</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="oid-footer" style="position:absolute; bottom:15px; left:30px; font-family: monospace; font-size:0.75rem; color:#aaa;">
+    P<<<<<PLAINLAND<<<<<<MMXXVI<<<<<<<<<<<<<<<<<<
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+function generarOID() {
+    const nombre = document.getElementById('reg-nombre').value;
+    const fecha = document.getElementById('reg-fnac').value;
+    if (!nombre || !fecha) return alert("Complete sus datos reales.");
+
+    document.getElementById('res-nom').innerText = nombre.toUpperCase();
+    const f = new Date(fecha);
+    document.getElementById('res-fec').innerText = f.toLocaleDateString('es-ES', {day:'numeric', month:'short', year:'numeric'});
+    document.getElementById('res-esp').innerText = document.getElementById('reg-especie').value;
+    document.getElementById('res-loc').innerText = document.getElementById('reg-residencia').value;
+    document.getElementById('oid-serial-val').innerText = "PL" + Math.floor(Math.random() * 90000000 + 10000000);
+
+    const fotoInput = document.getElementById('reg-foto').files[0];
+    const imgPreview = document.getElementById('oid-img-preview');
+
+    if (fotoInput) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imgPreview.src = e.target.result;
+            imgPreview.style.display = 'block';
+            setTimeout(descargarOID, 500);
+        }
+        reader.readAsDataURL(fotoInput);
+    } else {
+        imgPreview.style.display = 'none';
+        descargarOID();
+    }
+}
+
+function descargarOID() {
+    const template = document.getElementById('oid-template');
+    html2canvas(template, { scale: 2 }).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'OID_Plainland.png';
+        link.href = canvas.toDataURL();
+        link.click();
+
+        // Previsualización en la página
+        const preview = document.getElementById('preview-container');
+        preview.innerHTML = '';
+        const img = new Image();
+        img.src = canvas.toDataURL();
+        img.style.maxWidth = '100%';
+        img.style.border = '2px solid #1c3a2c';
+        img.style.borderRadius = '12px';
+        preview.appendChild(img);
+    });
+}
+</script>
+
+</main>
+
 <footer>
-    <p>GLORIA AL SEGUNDO REINO • MMXXVI</p>
+GLORIA AL SEGUNDO REINO
 </footer>
 
 </body>
 </html>
+
+
+
+
