@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plainland | Portal Oficial del Reino</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap">
 
 <style>
 :root {
@@ -21,8 +21,10 @@
 body {
     margin: 0;
     background: var(--bg-color);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Noto Serif', serif; /* Aquí es donde ocurre la magia */
     color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* --- NAVEGACIÓN DESPLEGABLE --- */
@@ -538,6 +540,7 @@ h2 {
                 <div class="dropdown-content">
                     <a href="#que-es-plainland" style="background: rgba(27, 122, 53, 0.05); font-weight: 700;">❓ ¿Qué es Plainland?</a>
                     <a href="#historia">🤴 Cronología Real</a>
+                    <a href="#rey">🐰👑 El Rey</a>
                     <a href="#himno">👑 Himno de Plainland</a>
                     <a href="#festividades">🗓️ Calendario Festivo</a>
                     <a href="#media">🗃️ Archivo de la Corona</a>
@@ -552,6 +555,7 @@ h2 {
                     <a href="#cartografia">🗺️ Mapa Estratégico</a>
                     <a href="#territorios">🗾 Provincias Reales</a>
                     <a href="#infraestructura">🛣️ Vías e Infraestructura</a>
+                    <a href="#armario-benny">🛠️ El Armario de benny (laboratorios Carrot)</a>                    
                 </div>
             </div>
 
@@ -560,8 +564,10 @@ h2 {
                 <div class="dropdown-content">
                     <a href="#tecnologia">🧑‍💻 Desarrollo Tecnológico</a>
                     <a href="#ejercito">🎖️ Fuerzas C.A.R.R.O.T.</a>
+                    <a href="#vehiculos">🚗 Vehículos militares</a>
                     <a href="#misiones">Registro de Operaciones</a>
                     <a href="#economia">💵 Sistema Monetario</a>
+                    <a href="#laboratorios-carrot">🧪 I+D+i C.A.R.R.O.T.</a>
                     <a href="#marina-real">⚓ Marina Real (Seca)</a>
                 </div>
             </div>
@@ -582,6 +588,7 @@ h2 {
                 <div class="dropdown-content">
                     <a href="#oid">💳 Expedición de O.I.D.</a>
                     <a href="#piedra-tiempo">🪨 Piedra Meteorológica</a>
+                    <a href="#merchandising">🛍️ Plainland Emporium</a>
                 </div>
             </div>
         </nav>
@@ -651,6 +658,119 @@ h2 {
             .nav-link { font-size: 0.6rem; padding: 5px; }
             .brand-text { display: none; }
         }
+
+/* --- ESTILOS DEL ARMARIO --- */
+    .seccion-contenedor-armario {
+        padding: 60px 0;
+        background: #121212;
+        color: #e0c28d;
+        border-top: 5px solid #333;
+        text-align: center;
+    }
+
+    .armario-titulo-header {
+        border-left: 5px solid var(--royal-gold);
+        padding-left: 20px;
+        margin-bottom: 40px;
+        text-align: left;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .titulo-playfair {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        color: var(--royal-gold);
+        margin: 0;
+    }
+
+    .subtitulo-italic {
+        color: #888;
+        font-style: italic;
+        margin-top: 5px;
+    }
+
+    .btn-armario {
+        display: block;
+        width: 220px;
+        margin: 0 auto 30px auto;
+        padding: 12px 24px;
+        background: var(--royal-gold);
+        color: #000;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 20;
+        position: relative;
+    }
+
+    .armario-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background: #263238;
+        border: 8px solid #1a1a1a;
+        border-radius: 8px;
+        position: relative;
+        perspective: 2000px; /* Efecto 3D profundo */
+        min-height: 450px;
+        overflow: visible; /* Permitir que las puertas giren fuera del borde */
+    }
+
+    .armario-header-tag {
+        background: #1a1a1a;
+        padding: 10px;
+        color: var(--royal-gold);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        border-bottom: 3px solid var(--royal-gold);
+    }
+
+    .puerta {
+        position: absolute;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background: #37474f;
+        border: 2px solid #1a1a1a;
+        box-sizing: border-box;
+        transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10;
+    }
+
+    .puerta-izquierda { left: 0; transform-origin: left center; }
+    .puerta-derecha { right: 0; transform-origin: right center; }
+
+    .maneta {
+        width: 8px;
+        height: 50px;
+        background: #999;
+        border-radius: 2px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .puerta-izquierda .maneta { right: 10px; }
+    .puerta-derecha .maneta { left: 10px; }
+
+    .armario-interior {
+        padding: 40px;
+        text-align: left;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .interior-titulo { color: var(--royal-gold); border-bottom: 1px solid #444; }
+    .lista-objetos { list-style-type: '🔧 '; color: #ccc; line-height: 1.8; }
+    .nota-seguridad { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.4); border: 1px dashed #555; font-size: 0.85rem; color: #aaa; }
+
+    /* --- CLASE DE ACTIVACIÓN --- */
+    .armario-abierto .puerta-izquierda { transform: rotateY(-130deg); }
+    .armario-abierto .puerta-derecha { transform: rotateY(130deg); }
+    .armario-abierto .armario-interior { opacity: 1; transition-delay: 0.5s; }
+
     </style>
 </header>
 
@@ -725,9 +845,70 @@ h2 {
         </div>
     </section>
 
+<section id="rey" class="hymn-section" style="background: white; padding: 100px 0; display: block;">
+        
+        <div class="hymn-container" style="max-width: 850px; margin: auto; display: block;">
+            
+            <div style="width: 100%; display: block; text-align: center; margin-bottom: 50px;">
+                <h2 style="border: none; color: var(--deep-green); font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 0; width: 100%;">
+                    Rey Roberto I
+                </h2>
+                <div style="width: 100px; height: 3px; background: var(--royal-gold); margin: 20px auto;"></div>
+            </div>
+
+            <div class="reliquia-card" style="padding: 60px 50px; background: #fdfcf0; border: 1px solid var(--royal-gold); border-radius: 15px; display: block; clear: both;">
+                
+                <div class="stanza" style="border-left: 4px solid var(--royal-gold); padding-left: 40px; text-align: left; margin-left: 10px;">
+                    
+                    <div style="margin-left: 20px;"> <p style="font-size: 1.3rem; line-height: 1.5; color: var(--text-dark); margin-bottom: 10px;">
+                            "¡Bienvenidos a Plainland!,
+                        </p>
+                        <p style="color: var(--royal-gold); font-size: 0.9rem; letter-spacing: 3px; font-weight: bold; text-transform: uppercase; margin-bottom: 25px; margin-left: 20px;">
+                            LEPÓRIDO
+                        </p>
+                        <p style="font-size: 1.15rem; line-height: 1.8; color: var(--text-dark); font-style: italic; margin-bottom: 40px;">
+                            Me emociona mucho que estés leyendo esta página y sobre todo esta sección."
+                        </p>
+
+                        <div style="margin-bottom: 40px;">
+                            <h4 style="color: var(--deep-green); font-family: 'Playfair Display', serif; font-size: 1.5rem; border-bottom: 1px solid rgba(184, 134, 11, 0.2); padding-bottom: 10px; margin-bottom: 15px;">Visiones del Reino</h4>
+                            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-dark);">
+                                Imagino un Plainland que trascienda los tiempos. Un Reino donde la tradición clásica y el progreso caminen de la mano, asegurando que el verde de nuestros campos y el oro de nuestro cielo sean siempre el refugio de los justos.
+                            </p>
+                        </div>
+
+                        <div style="margin-bottom: 50px;">
+                            <h4 style="color: var(--deep-green); font-family: 'Playfair Display', serif; font-size: 1.5rem; border-bottom: 1px solid rgba(184, 134, 11, 0.2); padding-bottom: 10px; margin-bottom: 15px;">Nuestra Historia</h4>
+                            <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-dark);">
+                                Mi mandato se erige sobre los pilares de la estabilidad y el orden. Desde el trono, he velado por que cada nota de nuestro himno se traduzca en paz para el pueblo lepórido, consolidando nuestras fronteras bajo el brillo de la estrella blanca.
+                            </p>
+                        </div>
+
+                        <div style="padding: 25px; border: 1px dashed var(--royal-gold); border-radius: 10px; display: inline-block; min-width: 250px; background: rgba(184, 134, 11, 0.03); text-align: center;">
+                            <p class="chorus" style="margin: 0; font-size: 2rem; color: var(--deep-green); font-weight: bold;">
+                                ¡Adiós!
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px; text-align: right; padding-right: 10px;">
+                    <p style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--royal-gold); margin: 0;">
+                        S.M. Roberto I
+                    </p>
+                    <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 4px; color: #888; margin-top: 5px;">
+                        Soberano de Plainland
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section id="museo-reliquias" style="padding: 20px 0; margin-top: 30px;">
 
-<div style="border-left: 5px solid #dcd7bc; padding-left: 20px; margin-bottom: 30px;">
+       <div style="border-left: 5px solid #dcd7bc; padding-left: 20px; margin-bottom: 30px;">
             <h2 style="font-family: serif; font-size: 2.4rem; color: #1a1a1a; margin: 0;">
                 Archivo Central de Reliquias
             </h2>
@@ -807,58 +988,90 @@ h2 {
         </div>
     </section>
 
-    <section id="himno" class="hymn-section">
-            <h2>Himno Nacional</h2>
+    <section id="himno" style="padding: 100px 0; background: var(--deep-green); color: var(--royal-gold); border-top: 5px solid var(--royal-gold); border-bottom: 5px solid var(--royal-gold); position: relative;">
+        
+        <div style="max-width: 900px; margin: auto; text-align: center; padding: 0 20px;">
+            
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--royal-gold); margin-bottom: 10px; border: none;">Himno Nacional</h2>
+            <p style="letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 50px; opacity: 0.8;">Símbolo de la Soberanía de Plainland</p>
 
-            <div class="hymn-container">
-                    <div class="hymn-card">
-                            <h3>Himno del Segundo Gran Reino</h3>
+            <div style="background: white; color: var(--text-dark); padding: 50px; border-radius: 20px; border: 3px double var(--royal-gold); box-shadow: var(--card-shadow);">
+                
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--deep-green); font-size: 2rem; margin-bottom: 5px;">Himno del Segundo Gran Reino</h3>
+                <p style="color: #888; font-style: italic; margin-bottom: 40px; font-size: 0.9rem;">"Pavane, Op. 50 - Gabriel Fauré"</p>
 
-                            <div class="stanza">
-                                    <strong>Estrofa I</strong><br>
-                                    Plainland, tus campos hablan de sol,<br>
-                                    Verde horizonte, paz y labor.<br>
-                                    Bajo este cielo libre y sin fin,<br>
-                                    brota en tu suelo el buen porvenir.
+                <div style="margin-bottom: 50px; background: #fdfcf0; padding: 30px; border-radius: 15px; border: 1px solid var(--royal-gold); text-align: center;">
+                    <p style="margin-top: 0; font-weight: bold; color: var(--deep-green); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">🎶 Versión Oficial Instrumental</p>
+                    
+                    <a href="https://www.youtube.com/watch?v=SVk4WXX0Qcg" 
+                       target="_blank" 
+                       style="display: inline-block; background: var(--deep-green); color: var(--royal-gold); padding: 18px 35px; text-decoration: none; border-radius: 8px; font-weight: bold; border: 2px solid var(--royal-gold); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); font-size: 1.1rem;">
+                       ▶ REPRODUCIR HIMNO EN YOUTUBE
+                    </a>
+
+                    <p style="margin-top: 15px; font-size: 0.8rem; color: #666; opacity: 0.8;">
+                        (Haz clic para abrir el audio oficial en una nueva pestaña)
+                    </p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; text-align: left; line-height: 1.8; font-size: 1.1rem;">
+                    
+                    <div style="padding-left: 10px;">
+                        <div style="margin-bottom: 35px;">
+                            <strong style="color: var(--royal-gold); display: block; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Estrofa I</strong>
+                            <div style="padding-left: 20px; border-left: 2px solid #f0f0f0;">
+                                Plainland, tus campos hablan de sol,<br>
+                                Verde horizonte, paz y labor.<br>
+                                Bajo este cielo libre y sin fin,<br>
+                                brota en tu suelo el buen porvenir.
                             </div>
+                        </div>
 
-                            <div class="stanza chorus">
-                                    <strong>Coro</strong><br>
-                                    ¡Gloria al Reino, luz de nuestra fe!<br>
-                                    Firmes avanzamos, nada nos detiene ya.<br>
-                                    Blanco, amarillo y verde en la piel,<br>
-                                    Plainland sagrada, patria del bien.
+                        <div style="background: #fdfcf0; padding: 25px; border-radius: 10px; border-left: 5px solid var(--royal-gold); margin-left: 10px;">
+                            <strong style="color: var(--deep-green); display: block; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Coro</strong>
+                            <div style="padding-left: 20px; font-style: italic; color: #444;">
+                                ¡Gloria al Reino, luz de nuestra fe!<br>
+                                Firmes avanzamos, nada nos detiene ya.<br>
+                                Blanco, amarillo y verde en la piel,<br>
+                                Plainland sagrada, patria del bien.
                             </div>
-
-                            <div class="stanza">
-                                    <strong>Estrofa II</strong><br>
-                                    Clara tu estrella brilla al andar,<br>
-                                    blanca esperanza, fuerza y pilar.<br>
-                                    Luz amarilla, canto y raíz,<br>
-                                    guía del pueblo que quiere vivir.
-                            </div>
-
-                            <div class="stanza">
-                                    <strong>Estrofa III</strong><br>
-                                    Nuestra tierra despierta en su color,<br>
-                                    vientos que dan al alma su flor.<br>
-                                    Verde que brota libre y tenaz,<br>
-                                    blanco en la estrella, limpio compás.
-                            </div>
-
-                            <div class="stanza">
-                                    <strong>Estrofa IV</strong><br>
-                                    Tierras que cantan bajo el sol,<br>
-                                    cielo encendido en oro chillón.<br>
-                                    Juntos sembramos paso y canción,<br>
-                                    con manos firmes, sin rendición.
-                            </div>
-
-                            <a href="https://www.youtube.com/watch?v=SVk4WXX0Qcg" target="_blank" class="btn-audio" style="text-decoration: none;">
-                                ▶ Escuchar versión oficial
-                            </a>
+                        </div>
                     </div>
+
+                    <div style="padding-left: 10px;">
+                        <div style="margin-bottom: 30px;">
+                            <strong style="color: var(--royal-gold); display: block; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Estrofa II</strong>
+                            <div style="padding-left: 20px; border-left: 2px solid #f0f0f0;">
+                                Clara tu estrella brilla al andar,<br>
+                                blanca esperanza, fuerza y pilar.<br>
+                                Luz amarilla, canto y raíz,<br>
+                                guía del pueblo que quiere vivir.
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 30px;">
+                            <strong style="color: var(--royal-gold); display: block; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Estrofa III</strong>
+                            <div style="padding-left: 20px; border-left: 2px solid #f0f0f0;">
+                                Nuestra tierra despierta en su color,<br>
+                                vientos que dan al alma su flor.<br>
+                                Verde que brota libre y tenaz,<br>
+                                blanco en la estrella, limpio compás.
+                            </div>
+                        </div>
+
+                        <div>
+                            <strong style="color: var(--royal-gold); display: block; margin-bottom: 8px; font-size: 0.9rem; text-transform: uppercase;">Estrofa IV</strong>
+                            <div style="padding-left: 20px; border-left: 2px solid #f0f0f0;">
+                                Tierras que cantan bajo el sol,<br>
+                                cielo encendido en oro chillón.<br>
+                                Juntos sembramos paso y canción,<br>
+                                con manos firmes, sin rendición.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
     </section>
 
     <section id="cartografia">
@@ -1196,7 +1409,298 @@ h2 {
             </div>
         </section>
 
-<section id="infraestructura" style="padding: 40px 0; margin-top: 50px; border-top: 1px solid #eee;">
+   <section id="vehiculos" style="padding: 60px 0; background: linear-gradient(180deg, #f4f2eb 0%, #e8e4d1 100%); border-top: 5px solid var(--royal-gold);"> 
+        <div style="border-left: 5px solid var(--royal-gold); padding-left: 20px; margin-bottom: 40px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--deep-green); margin: 0; border: none;">
+                🏎️ Proyecto: El Isisí 90
+            </h2>
+            <p style="color: #666; font-style: italic; margin-top: 5px;">
+                Vehículo de Intercepción Rápida - División de Asfalto Soberano & C.A.R.R.O.T. Motorsport.
+            </p>
+        </div>
+
+        <div class="rich-text" style="margin-bottom: 40px;">
+            <p>
+                Desarrollado para asegurar las fronteras terrestres, el <strong>Isisí 90</strong> es la joya mecánica del ejército de Plainland. Basado en un chasis original de <em>Abarth 500 Esseesse</em>, esta unidad ha sido optimizada para la superioridad táctica en carretera mediante modificaciones estructurales de pintura y rodadura.
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+            
+            <div class="reliquia-card" style="border-top: 4px solid var(--royal-gold);">
+                <div class="reliquia-header">
+                    <span>REF: SS-MOD-090</span>
+                    <span>ORIGEN: TALLER REAL</span>
+                </div>
+                <div class="reliquia-foto" style="height: auto; padding: 10px; position: relative;">
+                    <div style="position: absolute; top: 15px; right: 15px; width: 45px; height: 45px; background: white; border-radius: 50%; border: 2px solid var(--royal-gold); z-index: 5; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                        <img src="https://cdn.webshopapp.com/shops/347118/files/440666842/image.jpg" alt="Esseesse Logo" style="width: 85%;">
+                    </div>
+
+                    <img src="https://i.ibb.co/hJ8Gcn4J/IMG-3396-1.jpg" 
+                         alt="Unidad Militar Isisí 90" 
+                         style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                </div>
+                <div class="reliquia-info" style="text-align: center; border-top: 1px dashed #dcd7bc;">
+                    <div class="status-archive" style="background: #a1887f;">AUTENTICADO</div>
+                    <p style="font-family: monospace; font-size: 0.8rem; color: #6d6756; margin: 5px 0 0 0; line-height: 1.4;">
+                        Unidad operativa real modificada    con especificaciones de combate estético.
+                    </p>
+                </div>
+            </div>
+
+            <div class="reliquia-card" style="border-top: 4px solid var(--royal-gold);">
+                <div class="reliquia-header">
+                    <span>MODELO: ABARTH 500 ESSEESSE</span>
+                    <span>ESTADO: LISTO PARA EL COMBATE</span>
+                </div>
+                <div class="reliquia-foto" style="font-size: 5rem;">🇮🇹🏁🛞</div>
+                <div class="reliquia-info">
+                    <div class="status-archive" style="background: #1b301b;">ESPECIFICACIONES DE TUNING   </div>
+                    <ul style="font-size: 0.9rem; line-height: 1.6; color: #4a4538; padding-left: 20px; list-style-type: '⚡ ';">
+                        <li><strong>Motorización:</strong> 1.4 Turbo (Respuesta inmediata ante invasiones).</li>
+                        <li><strong>Sistema de Rodadura:</strong> Llantas de aleación ligera optimizadas   .</li>
+                        <li><strong>Blindaje Visual:</strong> Pintura táctica personalizada de alta resistencia.</li>
+                        <li><strong>Propulsión:</strong> S.A.I. (Sistema de Afirmación Isisí).</li>
+                        <li><strong>Aerodinámica:</strong> Perfil rebajado para dominio del asfalto.</li>
+                        <li><strong>Sello de Soberanía:</strong> 100% Homologado por el Reino.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-card" style="margin-top: 25px;">
+            <div class="mission-header">
+                <span>INFORME DE PATRULLA: PRUEBA 90-I</span>
+                <span>NIVEL: MÁXIMA SOBERANÍA</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--royal-gold-light); font-family: monospace; line-height: 1.6;">
+                > Se inició la marcha en el Sector Garaje Central.<br>
+                > Las nuevas llantas demostraron un agarre superior al 200% frente a la envidia vecina.<br>
+                > ¿Es este el coche más rápido de Plainland? La respuesta del motor fue un rotundo <strong>ISISÍ</strong>.<br>
+                > <span style="color: #00ff00;">[ESTADO: SOBERANÍA GARANTIZADA]</span> El asfalto ahora es propiedad del Reino.
+            </p>
+            <div style="margin-top: 15px; padding: 10px; border: 1px dashed #444; font-size: 0.7rem; color: #888; text-align: center;">
+                REINO DE PLAINLAND - DEPARTAMENTO DE MECÁNICA MECANIZADA   .
+                pd: la pintura brilla tanto que los radares piden permiso para mirar.
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; padding: 20px; border: 1px solid var(--royal-gold); border-radius: 10px; background: white; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 0.85rem; color: #555; margin: 0;">
+                <strong>ADVERTENCIA DEL CARROT:</strong> No preguntar por el consumo de combustible. El Isisí 90 se alimenta exclusivamente de gloria, libertad y gasolina 98. Si ve un bache, por favor, pida permiso antes de saltarlo.
+            </p>
+        </div>
+
+        <div style="border-left: 5px solid var(--royal-gold); padding-left: 20px; margin-bottom: 40px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--deep-green); margin: 0; border: none;">
+                ⚓ Proyecto: La Cabra de Montaña
+            </h2>
+            <p style="color: #666; font-style: italic; margin-top: 5px;">
+                Acorazado Terrestre de Asalto - División Naval de Secano & C.A.R.R.O.T. Strategic Command.
+            </p>
+        </div>
+
+        <div class="rich-text" style="margin-bottom: 40px;">
+            <p>
+                Diseñado para la pacificación definitiva del <strong>Anexo de Danesia</strong>, el modelo <em>"Cabra de Montaña"</em> es el primer vehículo de la Marina que no teme a los bordillos. Su arsenal ha sido descrito por observadores internacionales (el gato del vecino) como "excesivo" y "altamente ruidoso".
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
+            
+            <div class="reliquia-card" style="border-top: 4px solid var(--royal-gold);">
+                <div class="reliquia-header">
+                    <span>REF: GOAT-PROTO-01</span>
+                    <span>ORIGEN: TALLER REAL</span>
+                </div>
+                <div class="reliquia-foto" style="height: auto; padding: 10px;">
+                    <img src="https://i.pinimg.com/originals/03/8c/79/038c79f9a96faa98fb5d4b518bd6b784.jpg" 
+                         alt="Prototipo de La Cabra de Montaña" 
+                         style="max-width: 100%; height: auto; border-radius: 5px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                </div>
+                <div class="reliquia-info" style="text-align: center; border-top: 1px dashed #dcd7bc;">
+                    <div class="status-archive" style="background: #a1887f;">CONFIDENCIAL</div>
+                    <p style="font-family: monospace; font-size: 0.8rem; color: #6d6756; margin: 5px 0 0 0; line-height: 1.4;">
+                        Maqueta escala 1:4, el original está hecho de cartón reforzado y acero galvanizado
+                    </p>
+                </div>
+            </div>
+
+            <div class="reliquia-card" style="border-top: 4px solid var(--royal-gold);">
+                <div class="reliquia-header">
+                    <span>MODELO: GOAT-MK1 "THE DANESIA TERMINATOR"</span>
+                    <span>ESTADO: ARMADO Y CARGADO</span>
+                </div>
+                <div class="reliquia-foto" style="font-size: 5rem;">🚜💣🥔</div>
+                <div class="reliquia-info">
+                    <div class="status-archive" style="background: #1b301b;">ESPECIFICACIONES DE COMBATE</div>
+                    <ul style="font-size: 0.9rem; line-height: 1.6; color: #4a4538; padding-left: 20px; list-style-type: '💥 ';">
+                        <li><strong>Motor Principal:</strong> DC de 4.5 HP (Pura furia eléctrica).</li>
+                        <li><strong>Motor de Emergencia:</strong> S.P.R. (Sistema de Propulsión por Hámsters de Élite).</li>
+                        <li><strong>Velocidad:</strong> 15 km/h (Casi imperceptible si parpadeas).</li>
+                        <li><strong>Artillería:</strong> Lanzador de Patatas a propulsión.</li>
+                        <li><strong>Ojivas:</strong> Petardos Clase F3 (El arma más fuerte del Reino).</li>
+                        <li><strong>Defensa:</strong> 2 Lanzadores de Maíz laterales.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-card" style="margin-top: 25px;">
+            <div class="mission-header">
+                <span>INFORME DE BALÍSTICA: PRUEBA 0-1</span>
+                <span>NIVEL: PELIGRO EXTREMO</span>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--royal-gold-light); font-family: monospace; line-height: 1.6;">
+                > El avance a 15 km/h fue implacable.<br>
+                > Se disparó una patata de prueba. Impactó en una maceta. La maceta pidió clemencia.<br>
+                > Se activaron los petardos F3. Los hámsters de emergencia entraron en modo pánico positivo.<br>
+                > <span style="color: #00ff00;">[FINAL DE LA PRUEBA]</span> Danesia nos temerá.
+            </p>
+            <div style="margin-top: 15px; padding: 10px; border: 1px dashed #444; font-size: 0.7rem; color: #888; text-align: center;">
+                REINO DE PLAINLAND - DEPARTAMENTO DE ARTILLERÍA DE COCINA.
+                pd: no sabemos como atacar a un servidor de minecraft
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center; padding: 20px; border: 1px solid var(--royal-gold); border-radius: 10px; background: white; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 0.85rem; color: #555; margin: 0;">
+                <strong>ADVERTENCIA DEL CARROT:</strong> No apuntar el Lanzador de Patatas hacia el Almirante. Los petardos F3 solo deben usarse si el enemigo se niega a reconocer la soberanía de Plainland tras tres avisos.
+            </p>
+        </div>
+    </section>
+
+    <section id="laboratorios-carrot" style="padding: 60px 0; background: #0d1a0d; color: #e0c28d; border-top: 5px solid var(--royal-gold);">
+        <div style="border-left: 5px solid var(--royal-gold); padding-left: 20px; margin-bottom: 40px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--royal-gold); margin: 0;">
+                🧪 Laboratorios C.A.R.R.O.T.
+            </h2>
+            <p style="color: #888; font-style: italic; margin-top: 5px;">
+                "Innovando hoy en los problemas que inventaremos mañana."
+            </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            
+            <div class="mission-card" style="background: #162616; border: 1px solid #2a402a;">
+                <div class="mission-header">
+                    <span>ESTADO DE PROYECTOS CRÍTICOS</span>
+                    <span>v.2.0.4</span>
+                </div>
+                <div style="padding: 15px;">
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                            <span>Proyecto "Wi-Fi en el Baño"</span>
+                            <span>12%</span>
+                        </div>
+                        <div style="width: 100%; background: #050a05; height: 8px; border-radius: 4px;">
+                            <div style="width: 12%; background: var(--royal-gold); height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                            <span>Lanzador de Maíz (Calibración)</span>
+                            <span>89%</span>
+                        </div>
+                        <div style="width: 100%; background: #050a05; height: 8px; border-radius: 4px;">
+                            <div style="width: 89%; background: #4CAF50; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 5px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px;">
+                            <span>Fase de preparación para el anexo de danesia</span>
+                            <span>90%</span>
+                        </div>
+                        <div style="width: 100%; background: #050a05; height: 8px; border-radius: 4px;">
+                            <div style="width: 100%; background: #ffd700; height: 100%; border-radius: 4px; box-shadow: 0 0 10px #ffd700;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mission-card" style="background: #050a05; border: 1px solid var(--royal-gold); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; background: red; color: white; font-size: 0.6rem; padding: 2px 10px; font-weight: bold; animation: pulse 1s infinite;">
+                    LIVE FEED
+                </div>
+                <div class="mission-header" style="background: #1a1a1a;">
+                    <span>📻 FRECUENCIA DE RADIO MILITAR</span>
+                </div>
+                <div style="padding: 15px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #00ff00; line-height: 1.5;">
+                    <p style="margin-bottom: 10px; border-bottom: 1px solid #1a331a; padding-bottom: 5px;">
+                        <span style="color: #666;">[13:35 PM]</span> <span style="color: var(--royal-gold);">OPERADOR_ALPHA:</span> Benny pidió una Pizza a las 1:35 PM. Repito: El paquete está en camino. Posible intervención de anchoas detectada.
+                    </p>
+                    <p style="margin-bottom: 10px; border-bottom: 1px solid #1a331a; padding-bottom: 5px;">
+                        <span style="color: #666;">[14:10 PM]</span> <span style="color: var(--royal-gold);">HQ_COMMAND:</span> Pruebas de la Cabra de Montaña acabadas: todo correcto. El chasis de cartón resistió un estornudo del Almirante.
+                    </p>
+                    <p style="margin-bottom: 10px; border-bottom: 1px solid #1a331a; padding-bottom: 5px;">
+                        <span style="color: #666;">[15:45 PM]</span> <span style="color: #ff3300;">ALERTA_MÁXIMA:</span> Un hámster de emergencia se ha fugado con el petardo F3. Iniciando protocolo "Pipa de Paz".
+                    </p>
+                    <p style="margin: 0; opacity: 0.5;">
+                        > Esperando nueva transmisión..._
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="margin-top: 30px; border: 1px dashed #2a402a; padding: 15px; font-size: 0.8rem; text-align: center; color: #6d826d;">
+            <p><strong>AVISO DEL CARROT:</strong> Cualquier parecido entre nuestras transmisiones militares y el hambre del personal es pura coincidencia táctica. No piratear esta señal (estamos usando el Wi-Fi del vecino).</p>
+        </div>
+    </section>
+
+    <style>
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+    </style>
+
+    <section id="armario-benny" class="seccion-contenedor-armario">
+        <div class="armario-titulo-header">
+            <h2 class="titulo-playfair">🛠️ El Armario del Garaje</h2>
+            <p class="subtitulo-italic">"Propiedad de Benny. El que toque algo, limpia el baño del Reino."</p>
+        </div>
+
+        <button id="btn-toggle-armario" class="btn-armario">🔓 ABRIR ARMARIO</button>
+
+        <div id="armario-fisico" class="armario-container">
+            <div class="armario-header-tag">Propiedad de Benny</div>
+
+            <div class="puerta puerta-izquierda"><div class="maneta"></div></div>
+            <div class="puerta puerta-derecha"><div class="maneta"></div></div>
+
+            <div class="armario-interior">
+                <h3 class="interior-titulo">Inventario Táctico del Garaje</h3>
+                <ul class="lista-objetos">
+                    <li><strong>PC Viejo de Benny:</strong> Se enciende y emite un humo azulado decorativo. HDD podrido, pero suena como tecno de vanguardia.</li>
+                    <li><strong>Cartón de Pizza de Bazuca:</strong> Benny dice que algún día lo usará como blindaje. Huele a gloria y orégano.</li>
+                    <li><strong>Excavadora de Juguete:</strong> Nadie sabe de dónde ha salido. Unidad de ingeniería pesada autoproclamada.</li>
+                    <li><strong>Balsas Hinchables del Gral. Benny:</strong> Flota oficial para la invasión del plato de ducha. 100% sumergibles (según Benny).</li>
+                </ul>
+                <div class="nota-seguridad">
+                    <strong>AVISO:</strong> Las galletas encontradas en el estante superior son cebo para hámsters. No ingerir.
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function() {
+                const boton = document.getElementById('btn-toggle-armario');
+                const armario = document.getElementById('armario-fisico');
+
+                if (boton && armario) {
+                    boton.onclick = function() {
+                        const estaAbierto = armario.classList.toggle('armario-abierto');
+                        this.innerHTML = estaAbierto ? "🔒 CERRAR ARMARIO" : "🔓 ABRIR ARMARIO";
+                    };
+                }
+            })();
+        </script>
+    </section>
+
+    <section id="infraestructura" style="padding: 40px 0; margin-top: 50px; border-top: 1px solid #eee;">
             
             <div style="font-size: 2.8rem; font-weight: bold; color: #1a1a1a; letter-spacing: -1px; margin-bottom: 10px; font-family: serif;">
                 Infraestructura Nacional: Cimientos del Mañana
@@ -1276,7 +1780,7 @@ h2 {
     <section id="economia">
         <h2>Sistema Monetario: La Flora</h2>
         <div class="rich-text">
-            <p>La <strong>Flora</strong> es la moneda oficial de Plainland. Respaldada por la producción agrícola de Los Naranjos, su valor es estable y envidiado por las naciones vecinas.</p>
+            <p>La <strong>Flora</strong> es la moneda oficial de Plainland. Respaldada por la producción agrícola de Los Naranjos, su valor es 1.3 €, valor envidiado por las naciones vecinas. Su símbolo es "❀" (U+2740)</p>
         </div>
         <div class="billete">
             <div style="font-size: 0.8rem; letter-spacing: 2px;">BANCO CENTRAL DE PLAINLAND</div>
@@ -1667,6 +2171,70 @@ function actualizarPiedraVirtual() {
             }, 80);
         }
     </script>
+
+<section id="merchandising" style="padding: 80px 0; background: #fdfcf0; border-top: 5px solid var(--royal-gold); border-bottom: 5px solid var(--royal-gold); margin-top: 50px;">
+        <div style="max-width: 1100px; margin: auto; text-align: center;">
+            
+            <div style="background: var(--deep-green); color: var(--royal-gold); padding: 40px; border: 4px double var(--royal-gold); border-radius: 15px; margin-bottom: 60px; box-shadow: var(--card-shadow); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: -10px; left: -10px; opacity: 0.1; font-size: 5rem;">📦</div>
+                <h2 style="color: var(--royal-gold); border: none; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 2.5rem;">Plainland Emporium</h2>
+                <p style="font-size: 1.6rem; font-weight: bold; letter-spacing: 1px; margin: 0; color: #fff;">"Compra en el Plainland Emporium. No se acepta compras online"</p>
+                <div style="margin-top: 20px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; opacity: 0.7;">Tasa de Cambio Oficial: 1 ❀ = 1.3 €</div>
+            </div>
+
+            <div class="museo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 40px; justify-content: center;">
+                
+                <div class="reliquia-card" style="display: flex; flex-direction: column; height: 100%; border: 1px solid var(--royal-gold); background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--card-shadow);">
+                    <div class="reliquia-header" style="display: flex; justify-content: space-between; background: var(--deep-green); color: var(--royal-gold); padding: 10px 15px; font-size: 0.75rem; font-weight: bold; border-bottom: 2px solid var(--royal-gold);">
+                        <span>REF: APPAREL-01</span>
+                        <span>INDUMENTARIA REAL</span>
+                    </div>
+                    <div style="padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; gap: 15px;">
+                        <a href="https://imgbb.com/" target="_blank">
+                            <img src="https://i.ibb.co/svcHt7JS/Camiseta-removebg-preview.png" alt="Camiseta Escudo" style="width: 100%; max-height: 200px; object-fit: contain;">
+                        </a>
+                        <div style="background: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px dashed #ccc;">
+                            <a href="https://imgbb.com/" target="_blank">
+                                <img src="https://i.ibb.co/84Kv7Vfm/Plainlandad.gif" alt="Demostración Oficial" style="width: 100%; max-height: 150px; object-fit: contain;">
+                            </a>
+                        </div>
+                        <div style="text-align: left;">
+                            <h3 style="margin: 10px 0; font-size: 1.4rem; color: var(--deep-green);">Camiseta blanca con escudo de armas</h3>
+                            <p style="font-size: 0.95rem; color: #666; line-height: 1.5;">La prenda definitiva para el ciudadano leal. Incluye el blasón heráldico del Reino en impresión de alta fidelidad.</p>
+                        </div>
+                    </div>
+                    <div style="background: #fdfcf0; padding: 15px; border-top: 1px solid #eee; font-weight: bold; font-size: 1.8rem; color: var(--deep-green); text-align: center;">
+                        15 ❀ / 19 €, 50 cent
+                    </div>
+                </div>
+
+                <div class="reliquia-card" style="display: flex; flex-direction: column; height: 100%; border: 1px solid var(--royal-gold); background: white; border-radius: 8px; overflow: hidden; box-shadow: var(--card-shadow);">
+                    <div class="reliquia-header" style="display: flex; justify-content: space-between; background: var(--deep-green); color: var(--royal-gold); padding: 10px 15px; font-size: 0.75rem; font-weight: bold; border-bottom: 2px solid var(--royal-gold);">
+                        <span>REF: APPAREL-02-KIT</span>
+                        <span>PACK SOBERANÍA</span>
+                    </div>
+                    <div style="padding: 20px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; gap: 15px;">
+                        <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; border: 1px solid #eee; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                            <a href="https://ibb.co/wZHwVpF9" target="_blank" style="width: 100%;">
+                                <img src="https://i.ibb.co/5XDnmsgN/IMG-2199.jpg" alt="Kit Suministros" style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd;">
+                            </a>
+                            <a href="https://imgbb.com/" target="_blank" style="width: 100%;">
+                                <img src="https://i.ibb.co/gZ7JC3Mr/profounder-com-b3cf014fcd00de78a9ece4010d00645d-772471d3b63cc81df16a-mp4-video-hq.gif" alt="Infraestructura Plainland" style="width: 100%; max-height: 150px; object-fit: contain; border-radius: 5px; border: 1px dashed #ccc;">
+                            </a>
+                        </div>
+                        <div style="text-align: left;">
+                            <h3 style="margin: 10px 0; font-size: 1.4rem; color: var(--deep-green);">Camiseta 100% Plainlandés</h3>
+                            <p style="font-size: 0.95rem; color: #666; line-height: 1.5;">¡La camiseta "100% Plainlandés" es un meme en Plainland! Realmente, no tiene mucho más significado</p>
+                        </div>
+                    </div>
+                    <div style="background: #fdfcf0; padding: 15px; border-top: 1px solid #eee; font-weight: bold; font-size: 1.8rem; color: var(--deep-green); text-align: center;">
+                        17 ❀ / 22 €, 10 cent
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <section id="media">
         <h2>Archivo Visual de la Corona</h2>
